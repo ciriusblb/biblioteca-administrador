@@ -1,0 +1,260 @@
+<div class="user-dashboard">
+    <div class="">
+        <div class="">
+                <div class="col-md-12">
+                  <div class="col-md-6 col-md-offset-3">
+                    <div id="imaginary_container"> 
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" ng-model="vm.buscar" placeholder="Search" >
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>  
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab"  ng-click="vm.reservass()"  href=".reservas">Reservas</a></li>
+                    <li><a data-toggle="tab" ng-click="vm.prestamoss()" href=".prestamos">Prestamos</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div ng-hide="mostrar_lista" class="reservas tab-pane fade in active">
+                      <h3>Usuarios</h3>
+                        <div class="col-md-12">
+                          <table class="table table-bordered table-hover">
+                              <thead class="">
+                                  <tr>
+                                      <th><em class="fa fa-cog"></em></th>
+                                      <th class="hidden-xs"><CENTER>Código Reserva</CENTER></th>
+                                      <th>Código Usuario</th>
+                                      <th>Apellidos y Nombres</th>
+                                      <th>Código Libro</th>
+                                      <th>Titulo Libro</th>
+                                      <th>Autor Libro</th>
+                                      <th>Lugar reserva</th>
+                                      <th>Fecha de vencimiento reserva</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr data-toggle="" data-target="" ng-repeat="reserva in vm.reservas">
+                                    <td align="center"><a class="btn btn-default" ng-click="vm.ver($index)"><em class="fa fa-eye"></em></a></td>
+                                    <td>{{reserva.codigo_reserva}} </td>
+                                    <td> {{reserva.codigo_usuario}} </td>
+                                    <td> {{reserva.apellido_usuario}} {{reserva.nombre_usuario}} </td>
+                                    <td> {{reserva.codigo_libro}} </td>
+                                    <td> {{reserva.titulo_l}} </td>
+                                    <td>{{reserva.autor_l}} </td>
+                                    <td>{{reserva.lugar_reserva}} </td>
+                                    <td>{{reserva.fecha_limite | date:"MMM d, y h:mm:ss a"}} </td>
+
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                    </div>
+                    <div ng-hide="mostrar_lista" class="prestamos tab-pane fade in">
+                      <h3>Usuarios</h3>
+                        <div class="col-md-12">
+                          <table class="table table-bordered table-hover">
+                              <thead class="">
+                                  <tr>
+                                      <th><em class="fa fa-cog"></em></th>
+                                      <th class="hidden-xs"><CENTER>Código Prestamo</CENTER></th>
+                                      <th>Código Usuario</th>
+                                      <th>Apellidos y Nombres</th>
+                                      <th>Código Libro</th>
+                                      <th>Titulo Libro</th>
+                                      <th>Autor Libro</th>
+                                      <th>Fecha de vencimiento prestamo</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr ng-repeat="prestamos in vm.prestamo" >
+                                    <td align="center"><a class="btn btn-default" ng-click="vm.see($index)"><em class="fa fa-eye"></em></a></td>
+                                    <td>{{prestamos.codigo_prestamo}} </td>
+                                    <td>{{prestamos.codigo_usuario}} </td>
+                                    <td>{{prestamos.apellido_usuario}} {{prestamos.nombre_usuario}} </td>
+                                    <td>{{prestamos.codigo_libro}} </td>
+                                    <td>{{prestamos.titulo_l}} </td>
+                                    <td>{{prestamos.autor_l}} </td>
+                                    <td>{{prestamos.fecha_limite | date:"MMM d, y h:mm:ss a"}} </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+
+<style type="text/css">
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+</style>
+
+
+
+<!-- prestamos -->
+                  <div ng-show="vm.pres==true" class="col-md-12 " id="addBook">
+                    <br>
+                    <form name="form" class="form-horizontal">
+                        <div class="col-md-12">
+                            <div class="form-group" >
+                              <label class="col-md-4 control-label" for="titulo">Codigo Libro</label>  
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.codigo_libro}}</span>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="autor">Titulo libro</label>
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.titulo_l}} </span>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="autor">Autor libro</label>
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.autor_l}} </span>
+                              </div>
+                            </div>
+
+                            <div class="form-group" >
+                              <label class="col-md-4 control-label" for="descripcion">Descripcion</label> 
+                              <div class="col-md-5">
+                                   <div class="col-md-12" style="border: 1px solid rgba(0,0,0,0.3); border-radius: 5px;">
+                                     <span class="-" >{{vm.newBook.descripcion_l}}</span>
+                                  </div>
+                              </div>   
+                            </div>
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="imagen">Imagen</label>  
+                              <div class="col-md-5">
+                                  <div class="row" style="border: red solid:2px">
+                                    <div class="col-xs-8 col-md-4">
+                                      <a href="" class="thumbnail">
+                                        <img ng-src="{{vm.imagen}}" alt="imagen" width="100px" ng-disabled="expression" >
+                                      </a>
+                                    </div>
+                                  </div>                       
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="ejemplares">Fecha Limite</label>
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.fecha_limite | date:"MMM d, y h:mm:ss a"}}</span>                      
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="area">En </label>
+                              <div class="col-md-5">
+                                <span name="area" class="form-control">{{vm.newBook.lugar_prestamo}}</span>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="submit"></label>
+                          <div class="col-md-4">
+                            <a ng-hide="save_bottom"  class="btn btn-default" ng-click="vm.Devolver($index)" href="">
+                              <i class="fa fa-floppy-o text-success"></i><span class="text-success">Devuelto</span>
+                            </a>
+                            <a  ng-hide="watch" class="btn btn-default move" ng-click="vm.cancelar()" ><i class="text-success text-danger"></i><span class="text-danger">Cancelar</span></a > 
+                          </div>
+                        </div>
+                    </form>
+                  </div>
+
+
+<!-- reservas -->
+                    <div ng-show="vm.reser==true" class="col-md-12 " id="addBook">
+                      <form name="form" class="form-horizontal">
+                        <div class="col-md-12">
+                            <br>
+                            <div class="form-group" >
+                              <label class="col-md-4 control-label" for="titulo">Codigo Libro</label>  
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.codigo_libro}}</span>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="autor">Titulo libro</label>
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.titulo_l}} </span>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="autor">Autor libro</label>
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.autor_l}} </span>
+                              </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-md-4 control-label" for="descripcion">Descripcion</label> 
+                                <div class="col-md-5">
+                                    <div class="col-md-12" style="border: 1px solid rgba(0,0,0,0.3); border-radius: 5px;">
+                                      <span class="-" >{{vm.newBook.descripcion_l}}</span>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="imagen">Imagen</label>  
+                              <div class="col-md-5">
+                                  <div class="row" style="border: red solid:2px">
+                                    <div class="col-xs-8 col-md-4">
+                                      <a href="" class="thumbnail">
+                                        <img ng-src="{{vm.imagen}}" alt="imagen" width="100px" ng-disabled="expression" >
+                                      </a>
+                                    </div>
+                                  </div>                       
+                              </div>
+                            </div>  
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="ejemplares">Fecha de Vencimiento</label>
+                              <div class="col-md-5">
+                                <span class="form-control">{{vm.newBook.fecha_limite | date:"MMM d, y h:mm:ss a"}}</span>                      
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-4 control-label" for="area">Para</label>
+                              <div class="col-md-5">
+                                <span name="area" class="form-control">{{vm.newBook.lugar_reserva}}</span>
+                              </div>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="submit"></label>
+                          <div class="col-md-4">
+                            <a ng-hide="save_bottom"  class="btn btn-default" ng-click="vm.Prestar()" href="">
+                              <i class="fa fa-floppy-o text-success"></i>
+                              <span class="text-success">Prestar</span>
+                            </a> 
+                            <a  ng-hide="watch" class="btn btn-default move" ng-click="vm.cancelar()" ><i class="text-success text-danger"></i><span class="text-danger">Volver</span></a >
+                          </div>
+                        </div>
+                      </form>
+                    </div>

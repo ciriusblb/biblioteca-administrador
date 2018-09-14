@@ -1,0 +1,72 @@
+<div class="user-dashboard">
+    <div class="">
+        <div class="">
+                <div class="col-md-12">
+                  <div class="col-md-6 col-md-offset-3">
+                    <div id="imaginary_container"> 
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" ng-model="vm.buscar" placeholder="Search" >
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>  
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" ng-click="vm.ShowAll()" >Todos</a></li>
+                    <li><a data-toggle="tab" ng-click="vm.ShowFree()">Usuarios Libres</a></li>
+                    <li><a data-toggle="tab" ng-click="vm.ShowPenalized()">Usuarios Penalizados</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div id="home" class="todos tab-pane fade in active">
+                      <h3>Usuarios</h3>
+                        <div class="col-md-12">
+                          <table class="table table-bordered table-hover">
+                              <thead class="">
+                                  <tr>
+                                      <th><em class="fa fa-cog"></em></th>
+                                      <th class="">Código</th>
+                                      <th class="">Apellidos y Nombres</th>
+                                      <th class="">Carrera Profesional</th>
+                                      <th class="">Estado</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr ng-repeat="usuarios in vm.users | filter:vm.ver">
+                                    <td align="center"><a ng-click="vm.penalizado($index)" class="btn btn-default" ><em class="fa fa-flash"></em></a></td>
+                                    <td ng-click="vm.view($index)">{{usuarios.codigo_usuario}}</td>
+                                    <td ng-click="vm.view($index)">{{usuarios.apellido_usuario}} {{usuarios.nombre_usuario}}</td>
+                                    <td ng-click="vm.view($index)">{{usuarios.escuela_usuario}}</td>
+                                    <td ng-click="vm.view($index)">{{usuarios.penalizado}}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+
+<style type="text/css">
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+</style>
+

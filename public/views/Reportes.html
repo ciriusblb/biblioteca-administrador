@@ -1,0 +1,78 @@
+
+
+<div class="container">
+    <div class="row">
+        <h2>Libros por meses</h2>
+        <div class="btn-group"  role="group" >
+                <button type="button" class="btn btn-default" ng-click="vm.createPdf()" ng-disabled="reporForm.$invalid  ">Exportar</button>
+              </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="searchable-container">
+                <div class="items col-xs-5 col-sm-5 col-md-3 col-lg-3" ng-repeat = "a in anio" ng-model="a.value" ng-click="vm.selectMonth($index)">
+                    <div class="info-block block-info clearfix">
+                        <div class="square-box pull-left">
+                            <span class="glyphicon glyphicon-tags glyphicon-lg"></span>
+                        </div>
+                        <div data-toggle="buttons" class="btn-group bizmoduleselect">
+                            <label class="btn btn-default" id="{{a.id}}">
+                                <div class="bizcontent">
+                                    <input type="checkbox" name="var_id[]" autocomplete="off" value="">
+                                    <span class="glyphicon glyphicon-ok glyphicon-lg"></span>
+                                    <h5>{{a.mes}}</h5>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <h2>Tipos de Usuarios</h2>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="searchable-container">
+                <div class="items col-xs-5 col-sm-5 col-md-3 col-lg-3" ng-repeat = "b in usuarios" ng-model="b.value" ng-click="vm.selectType($index)" id="{{b.id}}">
+                    <div class="info-block block-info clearfix">
+                        <div class="square-box pull-left">
+                            <span class="glyphicon glyphicon-tags glyphicon-lg"></span>
+                        </div>
+                        <div data-toggle="buttons" class="btn-group bizmoduleselect">
+                            <label class="btn btn-default" id="{{b.array}}">
+                                <div class="bizcontent">
+                                    <input type="checkbox" name="var_id[]" autocomplete="off" value="">
+                                    <span class="glyphicon glyphicon-ok glyphicon-lg"></span>
+                                    <h5>{{b.usuarios}}</h5>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .searchable-container{margin:20px 0 0 0}
+.searchable-container label.btn-default.active{background-color:#007ba7;color:#FFF}
+.searchable-container label.btn-default{width:90%;border:1px solid #efefef;margin:5px; box-shadow:5px 8px 8px 0 #ccc;}
+.searchable-container label .bizcontent{width:100%;}
+.searchable-container .btn-group{width:90%}
+.searchable-container .btn span.glyphicon{
+    opacity: 0;
+}
+.searchable-container .btn.active span.glyphicon {
+    opacity: 1;
+}
+
+</style>

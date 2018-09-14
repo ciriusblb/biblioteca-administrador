@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Book App</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/estilos.css">
+  	<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/css/toastr.css">
+
+    <!-- <link rel="stylesheet" type="text/css" href="/css/dashboard.css"> -->
+
+	
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-ui-router.min.js"></script>
+	<script src="js/angular-resource.min.js"></script>
+	<script src="js/ng-cookies.js"></script>
+	<script src="js/jquery.js"></script>
+  	<script src="js/bootstrap.js"></script>
+  	<script src="js/angular-messages.js"></script>
+  	<script src="js/mask.js"></script>
+  	<script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="js/toastr.js" ></script>
+
+    <script src="http://localhost:7000/socket.io/socket.io.js" ></script>
+
+ 	<!-- controladors -->
+ 	<script src="controllers/app.js"></script>
+ 	<script src="controllers/main/DashBoardCtrl.js"></script> 
+ 	<script src="controllers/main/EstadisticasCtrl.js"></script> 
+ 	<script src="controllers/main/CRUDCtrl.js"></script>
+    <script src="controllers/main/ReportesCtrl.js"></script> 
+    <script src="controllers/main/ReservasCtrl.js"></script>
+    <script src="controllers/main/UsuariosCtrl.js"></script>
+
+
+
+  	<script src="/common/common.service.js"></script>
+    <script src="/common/services/socket.js"></script>
+
+    <script src="/common/services/main/CrudService.js"></script>
+    <script src="/common/services/main/UploadService.js"></script>
+    <script src="/common/services/main/UsuariosService.js" ></script>
+    <script src="/common/services/main/reservaService.js" ></script>
+    <script src="/common/services/main/LibroService.js" ></script>
+    <script src="/common/services/main/PrestamoService.js" ></script>
+    <script src="/common/services/main/DashboardService.js" ></script>
+
+    <script src="/common/services/main/estadisticaService.js" ></script>
+    <script src="/common/services/main/reporteService.js" ></script>
+
+    <script src="directives/file.js"></script>
+    <script src="directives/events.js" ></script>
+    <script src="directives/datos.js" ></script>
+
+    <script src="/widgets/widgetLineChart/rtLineChartDirective.js" ></script>
+    <script src="/widgets/widgetLineChart/rtLineChartDirectiveAnio.js" ></script>
+
+
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse top-navbar" id="top-nav ">
+	    <div class="container-fluid" id="para_mostrar">
+	        <div class="navbar-header">      
+	           <a class="navbar-brand" href="#"><img class="img-responsive" src="https://lh3.googleusercontent.com/-N4NB2F966TU/WM7V1KYusRI/AAAAAAAADtA/fPvGVNzOkCo7ZMqLI6pPITE9ZF7NONmawCJoC/w185-h40-p-rw/logo.png" width="150" height="20"></a>
+	        </div> 
+	        <ul class="social-icon pull-right list-inline">   
+	           <li class="dropdown"><a class="messages-link dropdown-toggle" data-toggle="dropdown" href="#" id="bam"><span > Suspender </span></li>   
+            </ul>       
+	    </div>  
+	</nav>   
+
+    <div class="prince">
+        <div class="container-2">
+            <div id="page-wrapper">   
+              	<div class="row">
+        		    <div class="col-md-12">
+        		      <div class="page-title">
+        		      <br>
+        		        <ol class="breadcrumb">
+        		         <li class="active"><i class="fa fa-dashboard"></i> Reservas App</li>
+        		          <li class="pull-right">
+        		           <div id="reportrange" class="btn btn-green btn-square date-picker">
+        		            <i class="fa fa-calendar"></i>
+        		             <span class="date-range">{{fecha.dia}} </span> <i class="fa fa-caret-down"></i>
+        		           </div>
+        		          </li>
+        		        </ol>
+        		       </div>
+        		     </div>
+        	    </div> 
+                                                     
+                <div class="row" >
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading green">
+                                    <i class="fa fa-dashboard fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content green">
+                                <div class="circle-tile-description text-faded">
+                                    DashBoard
+                                </div>
+                                <div devolver-Dato class="circle-tile-number text-faded">
+                                    {{dashboard}}
+                                </div>
+                                <a ui-sref="DashBoard" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-users fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    Usuarios
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{usuarios}}
+                                    <span id="sparklineA"></span>
+                                </div>
+                                <a ui-sref="Usuarios" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading orange">
+                                    <i class="fa fa-cogs fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content orange">
+
+                          <div class="circle-tile-description text-faded">
+                                    Books
+                                </div>
+                               <div devolver-Datos class="circle-tile-number text-faded">
+                                    {{libros}}
+                                    <span id="sparklineB"></span>
+                                </div>
+                                <a ui-sref="CRUD" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading blue">
+                                    <i class="fa fa-tasks fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content blue">
+                                <div class="circle-tile-description text-faded">
+                                    Reservas
+                                </div>
+                                <div devolver-Datos class="circle-tile-number text-faded">
+                                    {{reservas}}
+                                    <span id="sparklineB"></span>
+                                </div>
+                                <a ui-sref="Reservas" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading red">
+                                    <i class="fa fa-bar-chart-o fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content red">
+                                <div class="circle-tile-description text-faded">
+                                    Estadística
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    nada
+                                    <span id="sparklineC"></span>
+                                </div>
+                                <a ui-sref="Estadisticas" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading purple">
+                                    <i class="fa fa-clipboard fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content purple">
+                                <div class="circle-tile-description text-faded">
+                                    Reportes
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    nada
+                                    <span id="sparklineD"></span>
+                                </div>
+                                <a ui-sref="Reportes" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+       </div>
+       <div id="vista" class="container-2">
+           <div  ui-view></div>
+       </div>
+    </div>
+ 
+<script src="directives/slide.js" ></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script>
+        google.load('visualization','1.0', { 'packages': ['gauge','corechart','line','Bar'] });
+        google.setOnLoadCallback(function () {
+            angular.bootstrap(document, ['booksApp']);
+        });
+    </script>
+
+</body>
+
+
+
+</html>
