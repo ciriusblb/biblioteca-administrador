@@ -1,4 +1,4 @@
-# BIBLIOTECA - USUARIO
+# BIBLIOTECA - ADMINISTRADOR
 esta es la carpeta que contiene todo el codigo para la sitio web
 de una biblioteca para un administrador
 
